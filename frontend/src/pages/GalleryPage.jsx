@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Images, X, Download, ZoomIn, Search } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
+import { localBusinessSchema, breadcrumbSchema } from '../utils/seoSchemas';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
-import { gallery } from '../mock';
+import { gallery, companyInfo } from '../mock';
 
 const GalleryPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -11,6 +13,33 @@ const GalleryPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = ['all', 'Curățenie case', 'Birouri', 'Grădină', 'Echipă', 'Curățenie comercială'];
+
+  const breadcrumbs = breadcrumbSchema([
+    { name: 'Acasă', url: 'https://curatenie.vali-handyman.com/' },
+    { name: 'Galerie', url: 'https://curatenie.vali-handyman.com/galerie' }
+  ]);
+
+  const imageGallerySchema = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Galerie Foto General Fresh Cleaning",
+    "description": "Galerie foto cu peste 17 proiecte de curățenie finalizate în Târgu Mureș și județul Mureș",
+    "image": gallery.map(img => ({
+      "@type": "ImageObject",
+      "contentUrl": img.url,
+      "name": img.title,
+      "description": img.category
+    }))
+  };
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      localBusinessSchema,
+      breadcrumbs,
+      imageGallerySchema
+    ]
+  };
   
   const filteredGallery = gallery.filter(item => {
     const matchesFilter = filter === 'all' || item.category.includes(filter);
@@ -27,6 +56,14 @@ const GalleryPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEOHead
+        title="Galerie Foto - Proiecte Curățenie Târgu Mureș"
+        description="Vezi galeria foto cu peste 17 proiecte de curățenie finalizate în Târgu Mureș: curățenie case, birouri, grădini. Rezultate profesionale garantate de General Fresh Cleaning."
+        keywords="galerie foto curatenie, proiecte curatenie targu mures, poze curatenie profesionala, portofoliu curatenie, inainte dupa curatenie"
+        canonicalUrl="https://curatenie.vali-handyman.com/galerie"
+        schema={combinedSchema}
+      />
+      
       <Header />
       <WhatsAppButton />
       

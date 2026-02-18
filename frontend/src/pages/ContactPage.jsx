@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle, MessageSquare, Calendar } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
+import { localBusinessSchema, breadcrumbSchema } from '../utils/seoSchemas';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
@@ -17,6 +19,19 @@ const ContactPage = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const breadcrumbs = breadcrumbSchema([
+    { name: 'Acasă', url: 'https://curatenie.vali-handyman.com/' },
+    { name: 'Contact', url: 'https://curatenie.vali-handyman.com/contact' }
+  ]);
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      localBusinessSchema,
+      breadcrumbs
+    ]
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -47,6 +62,14 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEOHead
+        title="Contact - Solicită Ofertă Curățenie Târgu Mureș"
+        description="Contactează General Fresh Cleaning pentru servicii profesionale de curățenie în Târgu Mureș. Sună la +40 745 525 426 sau completează formularul pentru o ofertă personalizată. Program: Luni-Duminică până la 20:00."
+        keywords="contact firma curatenie targu mures, solicita oferta curatenie, programare curatenie mures, telefon curatenie targu mures, General Fresh Cleaning contact"
+        canonicalUrl="https://curatenie.vali-handyman.com/contact"
+        schema={combinedSchema}
+      />
+      
       <Header />
       <WhatsAppButton />
       
