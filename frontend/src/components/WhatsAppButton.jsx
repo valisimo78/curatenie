@@ -23,7 +23,7 @@ const WhatsAppButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`fixed bottom-6 right-6 z-50 group transition-all duration-300 ${
+      className={`fixed bottom-6 right-6 z-[9999] group transition-all duration-300 ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
       }`}
       aria-label="Contactează-ne pe WhatsApp"
