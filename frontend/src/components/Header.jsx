@@ -46,7 +46,7 @@ const Header = () => {
     { id: 'home', label: 'Acasă', path: '/' },
     { id: 'services', label: 'Servicii', sectionId: 'services' },
     { id: 'about', label: 'Despre Noi', sectionId: 'about' },
-    { id: 'gallery', label: 'Galerie', path: '/galerie' },
+    { id: 'gallery', label: 'Galerie', sectionId: 'gallery' },
     { id: 'reviews', label: 'Recenzii', sectionId: 'reviews' },
     { id: 'contact', label: 'Contact', path: '/contact' }
   ];

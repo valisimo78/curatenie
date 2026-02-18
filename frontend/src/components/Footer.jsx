@@ -71,9 +71,9 @@ const Footer = () => {
                 </button>
               </li>
               <li>
-                <Link to="/galerie" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <button onClick={() => handleNavigation(null, 'gallery')} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
                   Galerie
-                </Link>
+                </button>
               </li>
               <li>
                 <button onClick={() => handleNavigation(null, 'reviews')} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
