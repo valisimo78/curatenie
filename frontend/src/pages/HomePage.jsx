@@ -10,6 +10,7 @@ import CoverageSection from '../components/CoverageSection';
 import FAQSection from '../components/FAQSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const HomePage = () => {
   return (
@@ -27,6 +28,7 @@ const HomePage = () => {
         <ContactSection />
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
