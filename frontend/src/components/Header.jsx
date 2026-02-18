@@ -160,7 +160,7 @@ export default Header;
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavigation(item.path, item.sectionId)}
                 className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200"
               >
                 {item.label}
@@ -193,7 +193,7 @@ export default Header;
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleNavigation(item.path, item.sectionId)}
                   className="text-left text-gray-700 hover:text-emerald-600 font-medium py-2 transition-colors duration-200"
                 >
                   {item.label}
