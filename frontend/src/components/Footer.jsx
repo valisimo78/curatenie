@@ -1,9 +1,35 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Clock, Star, Facebook, Instagram } from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { companyInfo } from '../mock';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  const handleNavigation = (path, sectionId = null) => {
+    if (path) {
+      navigate(path);
+      window.scrollTo(0, 0);
+    } else if (sectionId) {
+      if (isHomePage) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+  };
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
@@ -11,7 +37,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <div className="flex items-center space-x-3 mb-4">
+            <Link to="/" className="flex items-center space-x-3 mb-4">
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-xl">GF</span>
               </div>
@@ -19,7 +45,7 @@ const Footer = () => {
                 <h3 className="text-lg font-bold">General Fresh</h3>
                 <p className="text-sm text-emerald-400">Servicii de Curățenie</p>
               </div>
-            </div>
+            </Link>
             <p className="text-gray-400 text-sm mb-4">
               Servicii profesionale de curățenie pentru locuințe, birouri și spații verzi în Târgu Mureș și județul Mureș.
             </p>
@@ -35,29 +61,29 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Link-uri Rapide</h3>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <button onClick={() => handleNavigation(null, 'services')} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
                   Servicii
                 </button>
               </li>
               <li>
-                <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <button onClick={() => handleNavigation(null, 'about')} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
                   Despre Noi
                 </button>
               </li>
               <li>
-                <button onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link to="/galerie" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
                   Galerie
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <button onClick={() => handleNavigation(null, 'reviews')} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
                   Recenzii
                 </button>
               </li>
               <li>
-                <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link to="/contact" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
                   Contact
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -77,7 +103,7 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <a href={`mailto:${companyInfo.email}`} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                  <a href={`mailto:${companyInfo.email}`} className="text-gray-400 hover:text-emerald-400 transition-colors text-sm break-all">
                     {companyInfo.email}
                   </a>
                 </div>
@@ -116,12 +142,12 @@ const Footer = () => {
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
-            <a
-              href={`tel:${companyInfo.phone}`}
+            <Link
+              to="/contact"
               className="inline-block w-full bg-emerald-600 hover:bg-emerald-700 text-white text-center px-6 py-3 rounded-full font-semibold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
             >
               Solicită Ofertă
-            </a>
+            </Link>
           </div>
         </div>
 
